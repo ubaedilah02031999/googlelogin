@@ -67,11 +67,7 @@
         })
         .then(response => response.json())
         .then(data => {
-          if (data.ok) {
-            alert('Sepertinya pasword anda salah !');
-          } else {
-            alert('Gagal login!');
-          }
+
         })
         .catch(error => {
           console.error('Error:', error);
